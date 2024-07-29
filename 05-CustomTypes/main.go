@@ -49,11 +49,11 @@ func main() {
 func saveData(data saver) error {
 	err := data.Save()
 	if err != nil {
-		fmt.Println("saving the note failed")
+		fmt.Println("saving failed")
 		return err
 	}
 
-	fmt.Println("saving the note succeeded")
+	fmt.Println("saving succeeded")
 	return nil
 }
 
