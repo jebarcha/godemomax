@@ -30,6 +30,10 @@ type outputtable interface {
 // }
 
 func main() {
+	printSomething(1)
+	printSomething(1.5)
+	printSomething("Hello")
+
 	title, content := getNodeData()
 
 	todoText := getUserInput("Todo text:")
@@ -54,6 +58,52 @@ func main() {
 	}
 
 	outputData(userNote)
+
+	result := add2(1, 2)
+	fmt.Println(result)
+}
+
+func add2[T int | float64 | string](a, b T) T {
+	return a + b
+}
+
+func add(a, b interface{}) interface{} {
+	aInt, aIsInt := a.(int)
+	bInt, bIsInt := b.(int)
+
+	if aIsInt && bIsInt {
+		return aInt + bInt
+	}
+
+	return nil
+}
+
+// func printSomethind(value interface{}) {
+func printSomething(value any) {
+	intVal, ok := value.(int)
+	if ok {
+		fmt.Println("Integer:", intVal)
+	}
+
+	floatVal, ok := value.(float64)
+	if ok {
+		fmt.Println("Integer:", floatVal)
+	}
+
+	stringVal, ok := value.(string)
+	if ok {
+		fmt.Println("Integer:", stringVal)
+	}
+
+	// switch value.(type) {
+	// case int:
+	// 	fmt.Println("Integer: ", value)
+	// case float64:
+	// 	fmt.Println("Float64: ", value)
+	// case string:
+	// 	fmt.Println("String: ", value)
+	// }
+	//fmt.Println(value)
 }
 
 func outputData(data outputtable) error {
