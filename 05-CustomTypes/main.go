@@ -14,6 +14,21 @@ type saver interface {
 	Save() error
 }
 
+type displayer interface {
+	Display()
+}
+
+type outputtable interface {
+	saver
+	displayer
+}
+
+// better create an embedded interface instead of:
+// type outputtable interface {
+// 	Save() error
+// 	Display()
+// }
+
 func main() {
 	title, content := getNodeData()
 
@@ -25,8 +40,8 @@ func main() {
 		return
 	}
 
-	todo.Display()
-	err = saveData(todo)
+	err = outputData(todo)
+
 	if err != nil {
 		return
 	}
@@ -38,11 +53,12 @@ func main() {
 		return
 	}
 
-	userNote.Display()
-	err = saveData(userNote)
-	if err != nil {
-		return
-	}
+	outputData(userNote)
+}
+
+func outputData(data outputtable) error {
+	data.Display()
+	return saveData(data)
 }
 
 // func saveData(data ) {}  a single function that could receive different types of data, we can do that using interfaces
