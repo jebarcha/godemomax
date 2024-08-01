@@ -2,38 +2,47 @@ package main
 
 import "fmt"
 
-func main() {
-	prices := []float64{10.99, 8.99}
-	fmt.Println(prices[0:1])
+type floatMap map[string]float64
 
-	prices[1] = 9.99
-
-	prices = append(prices, 5.99)
-	prices = prices[1:]
-	fmt.Println(prices)
-
+func (m floatMap) output() {
+	fmt.Println(m)
 }
 
-//func main() {
-// var productNames [4]string = [4]string{"A Book"}
-// prices := []float64{10.99, 9.99, 45.99, 20.0}
-// fmt.Println(prices)
+func main() {
+	//userNames := []string{}
+	userNames := make([]string, 2, 5)
 
-// productNames[2] = "A Carpet"
-// fmt.Println(productNames)
+	userNames[0] = "Ringo"
 
-// fmt.Println(prices[1])
+	userNames = append(userNames, "Paul")
+	userNames = append(userNames, "John")
 
-// //Slices
-// //featuredPrices := prices[1:3]  //start index 1 until 3 excluding 3
-// featuredPrices := prices[1:]
-// highligtedPrices := featuredPrices[:1]
-// fmt.Println("featuredPrices:", featuredPrices)
-// fmt.Println("highligtedPrices:", highligtedPrices)
+	userNames = append(userNames, "George")
+	userNames = append(userNames, "Beatles")
 
-// fmt.Println(len(featuredPrices), cap(featuredPrices))
-// fmt.Println(len(highligtedPrices), cap(highligtedPrices))
+	//fmt.Println(userNames)      //[Ringo  Paul John]
+	//fmt.Println(cap(userNames)) //5
 
-// highligtedPrices = highligtedPrices[:3]
-// fmt.Println(len(highligtedPrices), cap(highligtedPrices))
-//}
+	//courseRatings := map[string]float64{}
+	courseRatings := make(floatMap, 3)
+
+	courseRatings["go"] = 4.7
+	courseRatings["react"] = 4.8
+	courseRatings["angular"] = 4.5
+	courseRatings["node"] = 4.9
+
+	//courseRatings.output()
+
+	//fmt.Println(courseRatings)
+
+	for index, value := range userNames {
+		fmt.Println("Index:", index)
+		fmt.Println("Value", value)
+	}
+
+	for key, value := range courseRatings {
+		fmt.Println("Key:", key)
+		fmt.Println("Value:", value)
+	}
+
+}
